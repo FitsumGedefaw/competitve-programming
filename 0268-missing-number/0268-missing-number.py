@@ -1,10 +1,13 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        res = 0
-        for i in range(len(nums) + 1):
-            res ^= i
+        existingNums = {num for num in nums}
         
-        for n in nums:
-            res ^= n
+        #missingNum = -1
         
-        return res
+        for num in range(0, len(nums)+1):
+            if num not in existingNums:
+                return num
+                
+        
+            
+        
