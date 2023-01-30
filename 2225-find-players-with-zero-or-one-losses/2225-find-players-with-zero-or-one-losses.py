@@ -1,25 +1,17 @@
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        
-        lookup = defaultdict(int)
-        winners = set()
-        loosers = set()
-    
-        for win, loss in matches:
-            lookup[loss] += 1
-            if win not in lookup:
-                winners.add(win)
+        winners = {}
+        losers = {}
+                
+        for winner, loser in matches:
+            winners[winner] = winners.get(winner, 0) + 1
+            losers[loser] = losers.get(loser, 0) + 1
             
-            if loss in winners:
-                    winners.remove(loss)
-            
-            if lookup[loss] == 1:
-                loosers.add(loss)
-            else:
-                if loss in loosers:
-                    loosers.remove(loss)
+        notLostAnyMatches = [w for w in winners if w not in losers]
+        notLostAnyMatches.sort()
         
-        w = sorted(list(winners))
-        l = sorted(list(loosers))
-         
-        return [w, l] 
+        lostOneMatch = [l for l in losers if losers[l] == 1]        
+        lostOneMatch.sort()
+        
+        return [notLostAnyMatches, lostOneMatch]
+        
