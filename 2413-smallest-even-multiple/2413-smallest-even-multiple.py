@@ -1,6 +1,9 @@
 class Solution:
-    def smallestEvenMultiple(self, n: int) -> int: 
-        for i in range(n,300):
-            if i%2==0 and i%n==0:
-                return i
-                break
+    def smallestEvenMultiple(self, n: int) -> int:
+        num = n
+        
+        while num < float('inf'):
+            if num % n == 0 and num % 2 == 0:
+                return num
+            
+            num += 1 
