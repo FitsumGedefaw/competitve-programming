@@ -1,21 +1,27 @@
 class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
-        ans = ""
-        st = deque()
+        numOfOcc = {}
+        for ch in s:
+            numOfOcc[ch] = numOfOcc.get(ch, 0) + 1
+            
+        st = []
         inSt = set()
-        lastOcc = {}
-        for i, c in enumerate(s):
-            lastOcc[c] = i
-        for i in range(len(s)):
-            if s[i] not in inSt:
-                while st and s[i] < st[-1] and lastOcc[st[-1]] > i:
-                    inSt.remove(st.pop())  
-                st.append(s[i])
-                inSt.add(s[i])
-        while st:
-            ans += st.popleft()
-        return ans
+        
+        for ch in s:
+            if ch not in inSt:
+                while st and st[-1] > ch and numOfOcc[st[-1]] > 1:
+                    print(numOfOcc)
+                    c = st.pop()
+                    inSt.remove(c)
+                    numOfOcc[c] -= 1
+                    
+                st.append(ch)
+                inSt.add(ch)
+            else:
+                numOfOcc[ch] -= 1
+                
+        return "".join(st)
+                    
                 
             
-                
         
