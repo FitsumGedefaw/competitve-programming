@@ -5,19 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSameTree(self, root1, root2):
-        if not root1 and not root2:
-            return True
-        
-        if not root1 or not root2:
-            return False
-        
-        if root1.val != root2.val:
-            return False
-        
-        return self.isSameTree(root1.left, root2.right) and self.isSameTree(root1.right, root2.left)
-        
-        
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        return self.isSameTree(root.left, root.right)
+        st = [[root.left, root.right]]
+        
+        while st:
+            root1, root2 = st.pop()
+            
+            if not root1 and not root2:
+                continue
+            if not root1 or not root2:
+                return False
+            if root1.val != root2.val:
+                return False
+            
+            st.append([root1.left, root2.right])
+            st.append([root1.right, root2.left])
+        
+        return True
         
