@@ -5,28 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrderHelper(self, parents, res):
-        if not parents:
+    
+    def traversal(self, node, level, store):
+        if not node:
             return
         
-        nodesOnSameLevel = []
-        nextParents = []
-        for currNode in parents:
-            if currNode.left:
-                nodesOnSameLevel.append(currNode.left.val)
-                nextParents.append(currNode.left)
-            
-            if currNode.right:
-                nodesOnSameLevel.append(currNode.right.val)
-                nextParents.append(currNode.right)
-        if nodesOnSameLevel:
-            res.append(nodesOnSameLevel)
-        self.levelOrderHelper(nextParents, res)
+        store[level].append(node.val)
+        self.traversal(node.left, level+1, store)
+        self.traversal(node.right, level+1, store)
         
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if not root:
-            return []
+        store = defaultdict(list)
+        self.traversal(root, 0, store)
+        return store.values()        
         
-        res = [[root.val]]
-        self.levelOrderHelper([root], res)
-        return res
+        
