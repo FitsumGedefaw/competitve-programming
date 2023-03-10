@@ -5,33 +5,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def rsvHelper(self, currParents, res):
-        if not currParents:
+    def traversal(self, node, level, store):
+        if not node:
             return
         
-        for i in range(len(currParents)-1, -1, -1):
-            if currParents[i].right:
-                res.append(currParents[i].right.val)
-                break
-            if currParents[i].left:
-                res.append(currParents[i].left.val)
-                break
+        store[level] = node.val
+        self.traversal(node.left, level+1, store)
+        self.traversal(node.right, level+1, store)
         
-        nextParents = []
-        for parent in currParents:
-            if parent.left:
-                nextParents.append(parent.left)
-            if parent.right:
-                nextParents.append(parent.right)
-        
-        self.rsvHelper(nextParents, res)
-            
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        if not root:
-            return []
+        store = defaultdict(int)
+        self.traversal(root, 0, store)
         
-        res = [root.val]
-        self.rsvHelper([root], res)
-        return res
-        
+        return list(store.values())
         
