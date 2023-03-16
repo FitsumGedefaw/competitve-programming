@@ -7,7 +7,7 @@ class Solution:
             
             return totalSum
         
-        low, high = 1, max(nums)
+        low, high = 1, 10**6
         
         while low < high:
             mid = low + (high-low)//2
