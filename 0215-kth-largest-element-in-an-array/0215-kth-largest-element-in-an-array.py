@@ -2,9 +2,15 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         pivotNum = nums[0]
         
-        greaterNums = [num for num in nums if num > pivotNum]
-        equalNums = [num for num in nums if num == pivotNum]
-        smallerNums = [num for num in nums if num < pivotNum]
+        greaterNums, equalNums, smallerNums = [], [], []
+        
+        for num in nums:
+            if num < pivotNum:
+                smallerNums.append(num)
+            elif num > pivotNum:
+                greaterNums.append(num)
+            else:
+                equalNums.append(num)
         
         if k <= len(greaterNums):
             return self.findKthLargest(greaterNums, k)
