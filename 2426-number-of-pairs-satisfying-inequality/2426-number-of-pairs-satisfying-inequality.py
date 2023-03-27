@@ -9,8 +9,12 @@ class Solution:
             leftArr = mergedHelper(arr, left, mid,numOfPairs)
             rightArr = mergedHelper(arr, mid+1, right, numOfPairs)
             
-            for j in rightArr:
-                numOfPairs[0] += bisect_right(leftArr, j+diff)
+            i = j = 0
+            while j < len(rightArr):
+                while i < len(leftArr) and leftArr[i] <= rightArr[j]+diff:
+                    i += 1
+                numOfPairs[0] += i
+                j += 1
             
             return (merge(leftArr, rightArr))
                 
