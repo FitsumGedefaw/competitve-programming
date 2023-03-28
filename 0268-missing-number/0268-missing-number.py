@@ -6,8 +6,8 @@ class Solution:
         i = 0
         while i < len(nums):
             while nums[i] != -1 and i != nums[i]:
-                x = nums[i]
-                nums[i], nums[x] = nums[x], nums[i]
+                val = nums[i]
+                nums[i], nums[val] = nums[val], val
             
             if nums[i] == -1:
                 missingNum = i
