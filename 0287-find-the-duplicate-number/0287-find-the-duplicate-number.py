@@ -1,16 +1,20 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        i = 0
-        while i < len(nums):
-            corrPos = nums[i] - 1
+        duplicateNum = -1
+        left, right = 1, len(nums) - 1
+        
+        while left <= right:
+            mid = (left + right) // 2
             
-            if i != corrPos:
-                if nums[i] == nums[corrPos]:
-                    return nums[i]
-                nums[i], nums[corrPos] = nums[corrPos], nums[i]
-                
+            numsLessThanOrEqualToMid = 0
+            for num in nums:
+                if num <= mid: 
+                    numsLessThanOrEqualToMid += 1
+            
+            if numsLessThanOrEqualToMid > mid:
+                duplicateNum = mid
+                right = mid - 1
             else:
-                i += 1
+               left = mid + 1
         
-        
-        
+        return duplicateNum
