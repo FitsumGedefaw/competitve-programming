@@ -17,11 +17,8 @@ class Solution:
         maxNumOfConn, nextMaxNumOfConn = len(connectedCities[-1][1]), len(connectedCities[-2][1])
         maxNetRank = maxNumOfConn
         
-        print(connectedCities, maxNumOfConn, nextMaxNumOfConn)  
         for i in range(len(connectedCities)-2, -1, -1):
-            print(len(connectedCities[i][1]) < nextMaxNumOfConn)
             if len(connectedCities[i][1]) < nextMaxNumOfConn:
-                print(connectedCities[i][1], len(connectedCities[i][1]))
                 return maxNetRank
             else:
                 for j in range(len(connectedCities)-1, i, -1):
