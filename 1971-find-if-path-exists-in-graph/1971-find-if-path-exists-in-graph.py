@@ -27,10 +27,8 @@ class Solution:
             return findRep(x) == findRep(y)
         
         for src, dst in edges:
-            print()
-            print(src, dst)
             union(src, dst)
-            print()
+            
         return connected(source, destination)
             
         
