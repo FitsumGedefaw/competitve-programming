@@ -1,25 +1,19 @@
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
-        prevMin = []
-        minVal = nums[0]
+        currMin = nums[0]
+        currMed = float('inf')
         
-        for i in range(len(nums)):
-            minVal = min(minVal, nums[i])
-            prevMin.append(minVal)
+        for num in nums:
+            if num < currMin:
+                currMin = num
             
-        nextMax = [0] * len(nums)
-        maxVal = nums[-1]
-        
-        for i in range(len(nums)-1, -1, -1):
-            maxVal = max(maxVal, nums[i])
-            nextMax[i] = maxVal
+            elif currMin < num < currMed:
+                currMed = num
             
-        for i in range(len(nums)):
-            if prevMin[i] < nums[i] < nextMax[i]:
+            elif num > currMed:
                 return True
         
         return False
-                
-            
-            
+        
+        
         
