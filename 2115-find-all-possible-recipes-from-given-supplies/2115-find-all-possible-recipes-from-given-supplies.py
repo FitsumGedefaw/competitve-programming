@@ -11,6 +11,7 @@ class Solution:
                 graph[ingred].append(recipe)
                 incoming[recipe] += 1
             
+        recipes = set(recipes)
         queue = deque(supplies)
         doableMeals = []
                 
