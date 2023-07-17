@@ -24,14 +24,13 @@ class Solution:
         _sum = str(int(num1) + int(num2))
        # print("sum: ", _sum)
         
-        head = ListNode()
-        curr = head
-        for i in range(len(_sum)-1, -1, -1):
-            node = ListNode(int(_sum[i]))
-            curr.next = node
-            curr = curr.next
+        prev = None
+        for digit in _sum:
+            node = ListNode(int(digit))
+            node.next = prev
+            prev = node
         
-        return head.next
+        return prev
         
             
         
