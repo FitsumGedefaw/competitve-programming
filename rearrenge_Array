@@ -1,0 +1,35 @@
+#this is the solution code for the question https://leetcode.com/problems/rearrange-array-elements-by-sign/ on leetcode.
+
+
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+
+        #first i initiate lists to hold the positive and negative numbers
+        positive=[]
+        negative=[]
+
+        #populate the above lists
+        for number in nums:
+            if number>0:
+                positive.append(number)
+            else:
+                negative.append(number)
+        
+        #create two pointers
+        i=0
+        j=0
+        final=[]
+
+        #next loop through the lists and populate the final list as required
+        for h in range(len(nums)):
+            #the following conditionals are intended to make sure no two consecutive elements are the same sign
+            if h%2:
+                final.append(negative[j])
+                j+=1
+
+            else:
+                final.append(positive[i])
+                i+=1
+        #finally return the final list.
+        return final
+            
